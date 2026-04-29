@@ -69,7 +69,7 @@ const SERVICE_CATALOG = [
     id: 'wheel-alignment',
     name: 'Wheel Alignment',
     category: 'Tyres',
-    price: 1500,
+    price: 2000,
     duration: '60 mins',
     description: 'Precision alignment and balance correction for smoother driving.',
     tags: ['tyres', 'stability']
