@@ -113,7 +113,7 @@
         <div class="section-title section-gap">Estimated Cost</div>
         <div class="cost-card" id="costCard">
           <div>
-            <div class="cost-card-label">No service selected</div>
+            <div class="cost-card-label" id="costLabel">No service selected</div>
             <strong id="costServiceName">Choose a service from the catalog</strong>
           </div>
           <div class="cost-breakdown">
@@ -276,8 +276,10 @@
       const taxNode = document.getElementById('costTax');
       const totalNode = document.getElementById('costTotal');
       const selectedVehicle = getSelectedVehicle();
+      const costLabel = document.getElementById('costLabel');
 
       if (!selectedService) {
+        costLabel.textContent = 'No service selected';
         pill.textContent = 'Select a service to view estimate';
         serviceName.textContent = 'Choose a service from the catalog';
         baseNode.textContent = 'Rs. 0';
@@ -308,6 +310,7 @@
       state.latestQuote = quote;
 
       const confidenceLabel = quote ? ` / ${(Number(quote.confidence || 0) * 100).toFixed(0)}% confidence` : '';
+      costLabel.textContent = 'Selected service';
       pill.textContent = `${selectedService.name} / ${formatCurrency(total)}${confidenceLabel}`;
       serviceName.textContent = `${selectedService.name} / ${selectedService.duration}`;
       animateCurrencyValue(baseNode, base);
