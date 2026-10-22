@@ -80,6 +80,12 @@
       window.location.href = 'index.html';
     });
 
+    function formatDateTime(value) {
+      const dt = new Date(value);
+      if (Number.isNaN(dt.getTime())) return String(value || '');
+      return dt.toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+    }
+
     function escHtml(str) {
       return String(str)
         .replace(/&/g, '&amp;')
@@ -147,7 +153,7 @@
                 <span>&#128197; ${escHtml(booking.date)}</span>
                 <span>&#128336; ${escHtml(booking.timeSlot)}</span>
                 <span>&#128663; Plate ${escHtml(booking.vehicleNumber || '-')}</span>
-                <span>&#128221; Booked ${escHtml(booking.createdAt)}</span>
+                <span>&#128221; Booked ${escHtml(formatDateTime(booking.createdAt))}</span>
               </div>
               ${renderTimeline(booking)}
             </div>
@@ -356,7 +362,7 @@
               <div class="vehicle">${escHtml(item.title)}</div>
               <div class="meta">
                 <span>${escHtml(item.message)}</span>
-                <span>${escHtml(item.createdAt)}</span>
+                <span>${escHtml(formatDateTime(item.createdAt))}</span>
                 ${item.bookingReference ? `<span>Ref ${escHtml(item.bookingReference)}</span>` : ''}
               </div>
             </div>

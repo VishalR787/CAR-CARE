@@ -1125,6 +1125,15 @@ app.post('/api/bookings', authRequired, async (req, res, next) => {
       return;
     }
 
+    const quote = await buildHeuristicQuote({
+      userId: req.user.id,
+      service,
+      center,
+      vehicle,
+      date,
+      timeSlot
+    });
+
     const bookingReference = `CSV-${Date.now().toString().slice(-6)}`;
     const booking = {
       id: uid('booking'),
@@ -1137,7 +1146,7 @@ app.post('/api/bookings', authRequired, async (req, res, next) => {
       vehicleNumber,
       serviceType,
       serviceCategory: service.category,
-      servicePrice: service.price,
+      servicePrice: quote.predictedBase,
       centerId: center.id,
       centerName: center.name,
       centerCity: center.city,
