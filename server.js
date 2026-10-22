@@ -799,8 +799,26 @@ async function initializeDatabase() {
   }
 }
 
+const PRIVATE_PATHS = ['/data', '/server.js', '/package.json', '/package-lock.json'];
+
+function blockPrivateFiles(req, res, next) {
+  let requested;
+  try {
+    requested = path.posix.normalize(decodeURIComponent(req.path));
+  } catch (error) {
+    res.status(400).end();
+    return;
+  }
+  if (PRIVATE_PATHS.some((p) => requested === p || requested.startsWith(`${p}/`))) {
+    res.status(404).end();
+    return;
+  }
+  next();
+}
+
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use(blockPrivateFiles);
 app.use(express.static(ROOT));
 
 const upload = multer({
