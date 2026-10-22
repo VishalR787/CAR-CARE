@@ -227,7 +227,7 @@ h1 {
   border-radius: 8px;
   overflow: hidden;
   background:
-    linear-gradient(rgba(23, 32, 51, 0.28), rgba(23, 32, 51, 0.46)),
+    linear-gradient(rgba(23, 32, 51, 0.2), rgba(23, 32, 51, 0.82)),
     url("https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1400&q=80") center/cover;
   box-shadow: var(--shadow);
 }
@@ -241,60 +241,24 @@ h1 {
   gap: 24px;
 }
 
-.vehicle-plate {
-  align-self: flex-start;
-  padding: 10px 14px;
-  border-radius: 6px;
-  color: var(--ink);
-  background: #f8fafc;
-  border: 2px solid #172033;
-  font-weight: 900;
-  letter-spacing: 0;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+.visual-copy {
+  max-width: 420px;
+  color: #ffffff;
 }
 
-.road-scene {
-  height: 126px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, transparent 0 48%, rgba(255,255,255,0.16) 49% 51%, rgba(23,32,51,0.86) 52%);
-  position: relative;
+.visual-copy h2 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 800;
 }
 
-.car-shape {
-  width: 230px;
-  height: 82px;
-  position: absolute;
-  left: 6%;
-  bottom: 22px;
-  border-radius: 38px 58px 18px 18px;
-  background: linear-gradient(135deg, #f97316, #ef4444);
-  box-shadow: 0 22px 34px rgba(0,0,0,0.28);
+.visual-copy p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
 }
-
-.car-shape span {
-  position: absolute;
-  width: 84px;
-  height: 36px;
-  left: 68px;
-  top: -20px;
-  border-radius: 32px 32px 4px 4px;
-  background: #dbeafe;
-  border: 5px solid #fb923c;
-}
-
-.car-shape i,
-.car-shape b {
-  width: 34px;
-  height: 34px;
-  position: absolute;
-  bottom: -12px;
-  border-radius: 50%;
-  background: #111827;
-  border: 7px solid #e5e7eb;
-}
-
-.car-shape i { left: 34px; }
-.car-shape b { right: 34px; }
 
 .signal-row {
   display: grid;
@@ -371,6 +335,11 @@ h1 {
 }
 
 .seed-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
   color: var(--muted);
   font-size: 0.86rem;
   margin-bottom: 18px;

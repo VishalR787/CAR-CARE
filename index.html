@@ -15,18 +15,14 @@
   <main class="auth-layout">
     <section class="auth-visual" aria-label="CarSeva overview">
       <div class="visual-panel">
-        <div class="vehicle-plate">KA 01 CS 2026</div>
-        <div class="road-scene">
-          <div class="car-shape">
-            <span></span>
-            <i></i>
-            <b></b>
-          </div>
+        <div class="visual-copy">
+          <h2>Car servicing without the phone calls.</h2>
+          <p>Book a slot, see the price explained, and follow your car from drop-off to invoice.</p>
         </div>
         <div class="signal-row">
-          <div><strong>Tracking</strong><span>Received to completed</span></div>
-          <div><strong>Updates</strong><span>Notes and images</span></div>
-          <div><strong>Alerts</strong><span>Stored notifications</span></div>
+          <div><strong>Plate scan</strong><span>OCR fills your number</span></div>
+          <div><strong>Smart estimate</strong><span>Price explained rule by rule</span></div>
+          <div><strong>Live tracking</strong><span>From received to invoice</span></div>
         </div>
       </div>
     </section>
@@ -43,8 +39,9 @@
         <button type="button" class="portal-tab" data-role="mechanic">Mechanic Login</button>
       </div>
 
-      <div class="seed-box" id="seedBox">
-        Customer demo: customer@carseva.com / customer123
+      <div class="seed-box">
+        <span id="seedText">Customer demo: customer@carseva.com / customer123</span>
+        <button type="button" class="btn btn-outline btn-sm" id="useDemoBtn">Use demo account</button>
       </div>
 
       <div class="alert alert-success" id="successAlert">Login successful. Redirecting...</div>
@@ -107,7 +104,18 @@
     const passwordInput = document.getElementById('password');
     const successAlert = document.getElementById('successAlert');
     const registerPanel = document.getElementById('registerPanel');
-    const seedBox = document.getElementById('seedBox');
+    const seedText = document.getElementById('seedText');
+    const DEMO_ACCOUNTS = {
+      customer: { email: 'customer@carseva.com', password: 'customer123' },
+      mechanic: { email: 'mechanic@carseva.com', password: 'mechanic123' }
+    };
+
+    document.getElementById('useDemoBtn').addEventListener('click', function () {
+      const demo = DEMO_ACCOUNTS[state.role];
+      emailInput.value = demo.email;
+      passwordInput.value = demo.password;
+      clearErrors(['emailError', 'passwordError']);
+    });
 
     document.querySelectorAll('.portal-tab').forEach(function (button) {
       button.addEventListener('click', function () {
@@ -116,7 +124,7 @@
           tab.classList.toggle('active', tab === button);
         });
         registerPanel.style.display = state.role === 'customer' ? 'block' : 'none';
-        seedBox.textContent = state.role === 'customer'
+        seedText.textContent = state.role === 'customer'
           ? 'Customer demo: customer@carseva.com / customer123'
           : 'Mechanic demo: mechanic@carseva.com / mechanic123';
         emailInput.placeholder = state.role === 'customer' ? 'customer@carseva.com' : 'mechanic@carseva.com';
